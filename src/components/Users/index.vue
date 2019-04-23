@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ msg }}</h1>
     <v-layout v-for="user in users" :key="user.id" class="wrap">
       <v-flex sm4 offset-sm4>
@@ -16,7 +16,9 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat color="orange">Details</v-btn>
+            <v-btn v-on:click="test(user.id)" flat color="orange"
+              >Details</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -25,7 +27,7 @@
 </template>
 
 <script>
-import users from '../../constants';
+import { users } from '../../constants';
 
 export default {
   name: 'Users',
@@ -34,6 +36,11 @@ export default {
       msg: 'Welcome to Your Newsfeed',
       users,
     };
+  },
+  methods: {
+    test(userId) {
+      this.$router.push(`/${userId}`);
+    },
   },
 };
 </script>
