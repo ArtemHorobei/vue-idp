@@ -1,26 +1,9 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <h1>Welcome to Your Newsfeed</h1>
     <v-layout v-for="user in users" :key="user.id" class="wrap">
       <v-flex sm4 offset-sm4>
-        <v-card>
-          <v-card-title primary-title>
-            <img
-              src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
-              class="avatar"
-            />
-            <div>
-              <h3 class="headline mb-0">
-                {{ user.name }} as {{ user.username }}
-              </h3>
-            </div>
-          </v-card-title>
-          <v-card-actions>
-            <v-btn v-on:click="test(user.id)" flat color="orange"
-              >Details</v-btn
-            >
-          </v-card-actions>
-        </v-card>
+        <UserCard :user="user" :handleClick="handleClickDetails" />
       </v-flex>
     </v-layout>
   </div>
@@ -28,17 +11,20 @@
 
 <script>
 import { users } from '../../constants';
+import UserCard from './UserCard';
 
 export default {
   name: 'Users',
   data() {
     return {
-      msg: 'Welcome to Your Newsfeed',
       users,
     };
   },
+  components: {
+    UserCard,
+  },
   methods: {
-    test(userId) {
+    handleClickDetails(userId) {
       this.$router.push(`/${userId}`);
     },
   },
@@ -49,11 +35,5 @@ export default {
 <style scoped>
 .wrap {
   margin-bottom: 20px;
-}
-.avatar {
-  border-radius: 50%;
-  height: 70px;
-  margin-right: 10px;
-  width: 70px;
 }
 </style>
